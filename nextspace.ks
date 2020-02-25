@@ -8,16 +8,19 @@ part / --size 4048
 repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=os&arch=x86_64
 
 %packages
-@Base
+@base
+@core
+@x11
 %end
 
-%post
+%post --nochroot 
+cp /etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
+%end 
 
-yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+%post
+yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 yum -y update
-
-yum -y groupinstall "X Window System"
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libdispatch-1.3.1121-3.el7.x86_64.rpm
 
@@ -31,8 +34,7 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-0.85-3.el7.x86_64.rpm
 
-mkdir /Users
-
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextstep
 passwd -d nextstep > /dev/null
+
 %end
