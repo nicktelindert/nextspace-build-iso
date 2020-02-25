@@ -8,4 +8,4 @@ In development script to build the NEXTSPACE live-cd.
 - No gui networking tools
 - No decision made on base applications yet.
 
-[GO TO THE NEXTSPACE GITHUB PAGE](https://www.github.com/trunkmaster/nextspace)credits to Trunkmaster
+[GO TO THE NEXTSPACE GITHUB PAGE](https://www.github.com/trunkmaster/nextspace) credits to Trunkmaster
