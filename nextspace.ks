@@ -9,8 +9,10 @@ repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=o
 
 %packages
 @Base
-
 %end
+
+%post
+
 yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 yum -y update
@@ -29,5 +31,6 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-0.85-3.el7.x86_64.rpm
 
-adduser -b /Users -s /bin/zsh -G audio nextstep
+/sbin/adduser -b /Users -s /bin/zsh -G audio nextstep
 passwd -d nextstep > /dev/null
+%end
