@@ -1,25 +1,37 @@
 lang en_US.UTF-8
+firewall --disabled
 keyboard us
 timezone US/Eastern
 auth --useshadow --passalgo=sha512
 selinux --disabled
-part /boot/efi --fstype=efi --grow --maxsize 200 --size=20
-part /boot --fstype ext4 --size=512
-part / --size 3072
-
+rootpw --plaintext root
+url --url=http://ftp.tudelft.nl/centos.org/7.7.1908/os/x86_64/
 repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=os&arch=x86_64
-
-%packages
-@base
-@core
-%end
-
-%post --nochroot 
-cp /etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
-echo "nextspace.localdomain" > $INSTALL_ROOT/etc/hostname
-%end 
+network --bootproto=dhcp --onboot=on --activate
+shutdown
+bootloader --location=mbr
+zerombr
+clearpart --all
+part / --fstype=ext4 --size=2500
+part /boot --fstype=ext4 --size=500
+part /boot/efi --fstype=vfat --size=200
 
 %post
+cat /dev/null > /etc/fstab
+passwd -d root > /dev/null
+
+# /etc/hosts
+cat << EOF > ${fsdir}/etc/hosts
+127.0.0.1	localhost localhost.localdomain nextspace.local
+EOF
+
+# hostname
+cat << EOF > /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=nextspace.local
+NETWORKWAIT=1
+EOF
+
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 yum -y update
@@ -43,4 +55,16 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 passwd -d nextspace > /dev/null
 %end
 
-bootloader --location=partition
+%packages
+@core
+dracut-live
+kernel
+grub2
+grub2-efi
+efibootmgr
+memtest86+
+shim
+syslinux
+-dracut-config-rescue
+%end
+
