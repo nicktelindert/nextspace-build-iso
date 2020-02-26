@@ -51,17 +51,17 @@ passwd -d nextspace > /dev/null
 %packages
 @core
 @x11
+anaconda
 pulseaudio
 kernel
 grub2-efi-modules
 plymouth
-grub2
 efibootmgr
 memtest86+
-shim
+shim-x64
+grub2
 grub2-efi-x64-cdboot
 grub2-efi-x64
 syslinux
--dracut-config-rescue
 %end
 
