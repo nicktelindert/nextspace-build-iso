@@ -26,6 +26,7 @@ NETWORKING=yes
 HOSTNAME=nextspace.local
 NETWORKWAIT=1
 EOF
+yum -y install vim nano indent ImageMagick inkscape gawk
 
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
@@ -46,12 +47,16 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
 /sbin/usermod -a -G wheel,cdrom nextspace
 passwd -d nextspace > /dev/null
+wget https://raw.githubusercontent.com/nicktelindert/GenerateXWAppWrapper/master/generate-app-wrappers 
+sh generate-app-wrappers -i /usr/share/applications -o /Applications
 %end
 
 %packages
 @core
 @x11
+wget
 anaconda
+@anaconda-tools
 pulseaudio
 kernel
 grub2-efi-modules
