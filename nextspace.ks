@@ -47,7 +47,7 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
 /sbin/usermod -a -G wheel,cdrom nextspace
 passwd -d nextspace > /dev/null
-wget https://raw.githubusercontent.com/nicktelindert/GenerateXWAppWrapper/master/generate-app-wrappers 
+wget https://github.com/nicktelindert/GenerateXAppWrapper/releases/download/0.3/generate-app-wrappers
 sh generate-app-wrappers -i /usr/share/applications -o /Applications
 %end
 
