@@ -5,16 +5,11 @@ timezone US/Eastern
 auth --useshadow --passalgo=sha512
 selinux --disabled
 rootpw --plaintext root
-url --url=http://ftp.tudelft.nl/centos.org/7.7.1908/os/x86_64/
 repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=os&arch=x86_64
-network --bootproto=dhcp --onboot=on --activate
-shutdown
-bootloader --location=mbr
-zerombr
-clearpart --all
-part / --fstype=ext4 --size=2500
-part /boot --fstype=ext4 --size=500
-part /boot/efi --fstype=vfat --size=200
+
+%post --nochroot 
+cp /etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
+%end
 
 %post
 cat /dev/null > /etc/fstab
@@ -36,8 +31,6 @@ yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarc
 
 yum -y update
 
-yum -y install pulseaudio
-
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libdispatch-1.3.1121-3.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libobjc2-2.0-3.el7.x86_64.rpm
@@ -57,13 +50,17 @@ passwd -d nextspace > /dev/null
 
 %packages
 @core
-dracut-live
+@x11
+pulseaudio
 kernel
+grub2-efi-modules
+plymouth
 grub2
-grub2-efi
 efibootmgr
 memtest86+
 shim
+grub2-efi-x64-cdboot
+grub2-efi-x64
 syslinux
 -dracut-config-rescue
 %end
