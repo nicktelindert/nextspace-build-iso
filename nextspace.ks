@@ -6,6 +6,9 @@ auth --useshadow --passalgo=sha512
 selinux --disabled
 rootpw --plaintext root
 repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=os&arch=x86_64
+part / --fstype ext4 --size=3072
+part /boot --fstype ext4 --size=400
+part /boot/EFI --fstype efi --size=20
 
 %post --nochroot 
 cp /etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
@@ -43,12 +46,12 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-frameworks-0.85-2.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-0.85-3.el7.x86_64.rpm
+wget -O ~/installer.tar.gz https://github.com/nicktelindert/nextspace-build-iso/blob/master/installer.tar.gz  
+tar xvf ~/installer.tar.gz -C /Applications
 
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
 /sbin/usermod -a -G wheel,cdrom nextspace
 passwd -d nextspace > /dev/null
-wget https://github.com/nicktelindert/GenerateXAppWrapper/releases/download/0.3/generate-app-wrappers
-sh generate-app-wrappers -i /usr/share/applications -o /Applications
 %end
 
 %packages
