@@ -29,6 +29,7 @@ NETWORKING=yes
 HOSTNAME=nextspace.local
 NETWORKWAIT=1
 EOF
+
 yum -y install vim nano indent ImageMagick inkscape gawk
 
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -46,12 +47,12 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-frameworks-0.85-2.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-0.85-3.el7.x86_64.rpm
-wget -O ~/installer.tar.gz https://github.com/nicktelindert/nextspace-build-iso/blob/master/installer.tar.gz  
-tar xvf ~/installer.tar.gz -C /Applications
+wget -qO- https://github.com/nicktelindert/nextspace-build-iso/blob/master/installer.tar.gz?raw=true | tar xvz -C /Applications
 
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
 /sbin/usermod -a -G wheel,cdrom nextspace
 passwd -d nextspace > /dev/null
+/usr/sbin/plymouth-set-default-theme nextspace
 %end
 
 %packages
