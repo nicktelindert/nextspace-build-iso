@@ -18,6 +18,8 @@ cp /etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
 cat /dev/null > /etc/fstab
 passwd -d root > /dev/null
 
+/usr/bin/systemctl disable display-manager
+
 # /etc/hosts
 cat << EOF > ${fsdir}/etc/hosts
 127.0.0.1	localhost localhost.localdomain nextspace.local
@@ -50,9 +52,11 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 wget -qO- https://github.com/nicktelindert/nextspace-build-iso/blob/master/installer.tar.gz?raw=true | tar xvz -C /Applications
 
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
-/sbin/usermod -a -G wheel,cdrom nextspace
+/sbin/groupadd storage
+/sbin/usermod -a -G wheel,storage nextspace
 passwd -d nextspace > /dev/null
 /usr/sbin/plymouth-set-default-theme nextspace
+ln -s /usr/NextSpace/Apps/Login.app/Resources/loginwindow.service /etc/systemd/system/multi-user.target.wants/display-manager.service
 %end
 
 %packages
@@ -73,4 +77,3 @@ grub2-efi-x64-cdboot
 grub2-efi-x64
 syslinux
 %end
-
