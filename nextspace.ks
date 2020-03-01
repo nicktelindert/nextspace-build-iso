@@ -34,7 +34,11 @@ yum -y install vim nano indent ImageMagick inkscape gawk
 
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
+sudo yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+
 yum -y update
+
+yum -y install VirtualBox-guest-additions
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libdispatch-1.3.1121-3.el7.x86_64.rpm
 
