@@ -34,11 +34,11 @@ yum -y install vim nano indent ImageMagick inkscape gawk
 
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
-sudo yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+yum -y localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
 
 yum -y update
 
-yum -y install VirtualBox-guest-additions
+yum -y install VirtualBox VirtualBox-guest-additions dia mpv transmission
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libdispatch-1.3.1121-3.el7.x86_64.rpm
 
@@ -52,16 +52,14 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-0.85-3.el7.x86_64.rpm
 
-#wget -qO- https://github.com/nicktelindert/nextspace-build-iso/blob/master/installer.tar.gz?raw=true | tar xvz -C /Applications
-wget https://github.com/nicktelindert/GenerateXAppWrapper/releases/download/0.3/generate-app-wrappers --output-document /usr/bin/generate-app-wrappers
-chmod +x /usr/bin/generate-app-wrappers
-/usr/bin/generate-app-wrappers -i /usr/share/applications -o /Applications
+wget -qO- https://github.com/nicktelindert/nextspace-build-iso/raw/master/appwrappers.tar.gz | tar xvz -C /Applications
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
 /sbin/groupadd storage
 /sbin/usermod -a -G wheel,storage nextspace
 passwd -d nextspace > /dev/null
 /usr/sbin/plymouth-set-default-theme nextspace
 ln -s /usr/NextSpace/Apps/Login.app/Resources/loginwindow.service /etc/systemd/system/multi-user.target.wants/display-manager.service
+/usr/sbin/dracut -f
 %end
 
 %packages
@@ -82,6 +80,7 @@ grub2
 grub2-efi-x64-cdboot
 grub2-efi-x64
 syslinux
-gvim
 firefox
+emacs
+gimp
 %end
