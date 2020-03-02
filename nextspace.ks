@@ -52,7 +52,8 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-0.85-3.el7.x86_64.rpm
 
-wget -qO- https://github.com/nicktelindert/nextspace-build-iso/raw/master/appwrappers.tar.gz | tar xvz -C /Applications
+wget -qO- https://raw.githubusercontent.com/nicktelindert/nextspace-build-iso/master/appwrappers.tar.gz | tar xvz -C /Applications
+
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
 /sbin/groupadd storage
 /sbin/usermod -a -G wheel,storage nextspace
