@@ -55,6 +55,8 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 wget https://raw.githubusercontent.com/nicktelindert/nextspace-build-iso/master/appwrappers.tar.gz
 tar xvf appwrappers.tar.gz -C /Applications
 
+yum -y install https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive01/packages/wmsystemtray/1.4/3.fc24/x86_64/wmsystemtray-1.4-3.fc24.x86_64.rpm
+
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
 /sbin/groupadd storage
 /sbin/usermod -a -G wheel,storage nextspace
