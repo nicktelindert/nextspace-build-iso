@@ -28,7 +28,7 @@ NETWORKING=yes
 HOSTNAME=nextspace.local
 NETWORKWAIT=1
 EOF
-yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm\
+yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
 yum -y install vim nano indent ImageMagick inkscape gawk
 
@@ -52,15 +52,22 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-0.85-3.el7.x86_64.rpm
 
-wget -qO- https://raw.githubusercontent.com/nicktelindert/nextspace-build-iso/master/appwrappers.tar.gz | tar xvz -C /Applications
+wget https://raw.githubusercontent.com/nicktelindert/nextspace-build-iso/master/appwrappers.tar.gz
+tar xvf appwrappers.tar.gz -C /Applications
 
 /sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
 /sbin/groupadd storage
 /sbin/usermod -a -G wheel,storage nextspace
 passwd -d nextspace > /dev/null
-/usr/sbin/plymouth-set-default-theme nextspace
+/usr/sbin/plymouth-set-default-theme nextspace -R
 ln -s /usr/NextSpace/Apps/Login.app/Resources/loginwindow.service /etc/systemd/system/multi-user.target.wants/display-manager.service
-/usr/sbin/dracut -f
+yum -y remove tboot
+touch /Users/nextspace/Library/Preferences/.WindowMaker/autostart
+chmod +x /Users/nextspace/Library/Preferences/.WindowMaker/autostart
+
+echo "exec wmsystemtray &" > /Users/nextspace/Library/Preferences/.WindowMaker/autostart
+echo "exec nm-applet &" > /Users/nextspace/Library/Preferences/.WindowMaker/autostart
+echo "exec pa-systray &" > /Users/nextspace/Library/Preferences/.WindowMaker/autostart
 %end
 
 %packages
@@ -84,4 +91,6 @@ syslinux
 firefox
 emacs
 gimp
+pa-systray
+network-manager-applet
 %end
