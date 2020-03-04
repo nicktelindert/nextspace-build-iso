@@ -8,7 +8,10 @@ rootpw --plaintext root
 repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=os&arch=x86_64
 
 %post --nochroot 
-cp /etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
+cp etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
+cp etc/default/useradd $INSTALL_ROOT/etc/default/useradd
+cp etc/init.d/modgroups $INSTALL_ROOT/etc/init.d/modgroups
+chmod +x $INSTALL_ROOT/etc/rc.d/rc.local
 %end
 
 %post
@@ -30,7 +33,7 @@ NETWORKWAIT=1
 EOF
 yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
-yum -y install vim nano indent ImageMagick inkscape gawk
+yum -y install vim nano indent ImageMagick inkscape gawk pasystray
 
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
@@ -45,31 +48,40 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/l
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libobjc2-2.0-3.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-core-0.95-8.el7.x86_64.rpm
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-core-devel-0.95-8.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-gnustep-1.26.0_0.25.0-2.el7.x86_64.rpm
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-gnustep-devel-01.26.0_0.25.0-2.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-frameworks-0.85-2.el7.x86_64.rpm
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-frameworks-devel-0.85-2.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-0.85-3.el7.x86_64.rpm
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-applications-devel-0.85-3.el7.x86_64.rpm
+
 
 wget https://raw.githubusercontent.com/nicktelindert/nextspace-build-iso/master/appwrappers.tar.gz
 tar xvf appwrappers.tar.gz -C /Applications
 
 yum -y install https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive01/packages/wmsystemtray/1.4/3.fc24/x86_64/wmsystemtray-1.4-3.fc24.x86_64.rpm
 
-/sbin/adduser -b /Users -s /bin/zsh -G audio nextspace
-/sbin/groupadd storage
-/sbin/usermod -a -G wheel,storage nextspace
-passwd -d nextspace > /dev/null
 /usr/sbin/plymouth-set-default-theme nextspace -R
 ln -s /usr/NextSpace/Apps/Login.app/Resources/loginwindow.service /etc/systemd/system/multi-user.target.wants/display-manager.service
 yum -y remove tboot
-touch /Users/nextspace/Library/Preferences/.WindowMaker/autostart
-chmod +x /Users/nextspace/Library/Preferences/.WindowMaker/autostart
 
-echo "exec wmsystemtray &" > /Users/nextspace/Library/Preferences/.WindowMaker/autostart
-echo "exec nm-applet &" > /Users/nextspace/Library/Preferences/.WindowMaker/autostart
-echo "exec pa-systray &" > /Users/nextspace/Library/Preferences/.WindowMaker/autostart
+touch /etc/skel/Library/Preferences/.WindowMaker/autostart
+chmod +x /etc/skel/Library/Preferences/.WindowMaker/autostart
+
+/sbin/useradd -b /Users -s /bin/zsh -G audio nextspace
+/sbin/groupadd storage
+/sbin/usermod -a -G storage nextspace
+passwd -d nextspace > /dev/null
+
+
+
+echo "wmsystemtray &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
+echo "nm-applet &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
+echo "pasystray &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
 %end
 
 %packages
@@ -93,6 +105,5 @@ syslinux
 firefox
 emacs
 gimp
-pa-systray
 network-manager-applet
 %end

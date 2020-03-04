@@ -1,0 +1,5 @@
+users=`ls /Users`
+for u in $users
+do
+usermod -a -G audio $u
+done
