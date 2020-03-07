@@ -8,9 +8,10 @@ rootpw --plaintext root
 repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=os&arch=x86_64
 
 %post --nochroot 
-cp etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
+cp /etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
 cp etc/default/useradd $INSTALL_ROOT/etc/default/useradd
 cp etc/init.d/modgroups $INSTALL_ROOT/etc/init.d/modgroups
+cp etc/rc.d/rc.local $INSTALL_ROOT/etc/rc.d/rc.local
 chmod +x $INSTALL_ROOT/etc/rc.d/rc.local
 %end
 
@@ -43,15 +44,20 @@ yum -y update
 
 yum -y install VirtualBox VirtualBox-guest-additions dia mpv transmission
 
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/clang-libs-7.0.1-4.el7.x86_64.rpm
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/clang-7.0.1-4.el7.x86_64.rpm
+
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libdispatch-1.3.1121-3.el7.x86_64.rpm
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libdispatch-devel-1.3.1121-3.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libobjc2-2.0-3.el7.x86_64.rpm
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/libobjc2-devel-2.0-3.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-core-0.95-8.el7.x86_64.rpm
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-core-devel-0.95-8.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-gnustep-1.26.0_0.25.0-2.el7.x86_64.rpm
-yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-gnustep-devel-01.26.0_0.25.0-2.el7.x86_64.rpm
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-gnustep-devel-1.26.0_0.25.0-2.el7.x86_64.rpm
 
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-frameworks-0.85-2.el7.x86_64.rpm
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/nextspace-frameworks-devel-0.85-2.el7.x86_64.rpm
@@ -77,8 +83,6 @@ chmod +x /etc/skel/Library/Preferences/.WindowMaker/autostart
 /sbin/usermod -a -G storage nextspace
 passwd -d nextspace > /dev/null
 
-
-
 echo "wmsystemtray &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
 echo "nm-applet &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
 echo "pasystray &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
@@ -87,6 +91,7 @@ echo "pasystray &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
 %packages
 @core
 @x11
+kernel-devel
 wget
 anaconda
 @anaconda-tools

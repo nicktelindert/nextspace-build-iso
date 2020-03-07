@@ -1,3 +1,13 @@
+if [ -d "/home" ]; 
+then
+    usernames=`ls /home`
+    for username in $usernames
+    do
+        usermod -d /Users/$username $username -m
+    done
+    rm -rf /home
+fi
+
 users=`ls /Users`
 for u in $users
 do
