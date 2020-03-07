@@ -44,6 +44,8 @@ yum -y update
 
 yum -y install VirtualBox VirtualBox-guest-additions dia mpv transmission
 
+yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/llvm-libs-7.0.1-3.el7.x86_64.rpm
+
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/clang-libs-7.0.1-4.el7.x86_64.rpm
 yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/clang-7.0.1-4.el7.x86_64.rpm
 
@@ -93,6 +95,7 @@ echo "pasystray &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
 @x11
 kernel-devel
 wget
+git
 anaconda
 @anaconda-tools
 pulseaudio
