@@ -7,6 +7,31 @@ selinux --disabled
 rootpw --plaintext root
 repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=os&arch=x86_64
 
+%packages
+@core
+@x11
+kernel-devel
+wget
+git
+anaconda
+@anaconda-tools
+pulseaudio
+alsa-plugins-pulseaudio
+kernel
+plymouth
+grub2-efi-modules
+efibootmgr
+memtest86+
+shim-x64
+grub2
+grub2-efi-x64-cdboot
+grub2-efi-x64
+syslinux
+firefox
+emacs
+gimp
+network-manager-applet
+%end
 %post --nochroot 
 cp /etc/resolv.conf $INSTALL_ROOT/etc/resolv.conf
 cp etc/default/useradd $INSTALL_ROOT/etc/default/useradd
@@ -69,7 +94,7 @@ yum -y install https://github.com/trunkmaster/nextspace/releases/download/0.85/n
 
 
 wget https://raw.githubusercontent.com/nicktelindert/nextspace-build-iso/master/appwrappers.tar.gz
-tar xvf appwrappers.tar.gz -C /Applications
+tar xvf appwrappers.tar.gz -C /
 
 yum -y install https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive01/packages/wmsystemtray/1.4/3.fc24/x86_64/wmsystemtray-1.4-3.fc24.x86_64.rpm
 
@@ -79,39 +104,11 @@ yum -y remove tboot
 
 touch /etc/skel/Library/Preferences/.WindowMaker/autostart
 chmod +x /etc/skel/Library/Preferences/.WindowMaker/autostart
-
-/sbin/useradd -b /Users -s /bin/zsh -G audio nextspace
-/sbin/groupadd storage
-/sbin/usermod -a -G storage nextspace
-passwd -d nextspace > /dev/null
-
 echo "wmsystemtray &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
 echo "nm-applet &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
 echo "pasystray &" >> /etc/skel/Library/Preferences/.WindowMaker/autostart
-%end
 
-%packages
-@core
-@x11
-kernel-devel
-wget
-git
-anaconda
-@anaconda-tools
-pulseaudio
-alsa-plugins-pulseaudio
-kernel
-plymouth
-grub2-efi-modules
-efibootmgr
-memtest86+
-shim-x64
-grub2
-grub2-efi-x64-cdboot
-grub2-efi-x64
-syslinux
-firefox
-emacs
-gimp
-network-manager-applet
+/sbin/useradd -b /Users -s /bin/zsh -G audio nextspace
+/sbin/groupadd storage
+passwd -d nextspace > /dev/null
 %end
