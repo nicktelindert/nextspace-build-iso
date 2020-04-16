@@ -17,4 +17,6 @@ https://drive.google.com/open?id=1s-jG79uuR0hyrexpZFo7YE1LQNNuLxGw
 
 ## Run in it in QEMU
 
-qemu-system-x86_64 -m 1G -cdrom NEXTSPACE.iso
+qemu-system-x86_64 -enable-kvm -m 1G -cdrom NEXTSPACE.iso
+
+You really need KVM to get decent performance
