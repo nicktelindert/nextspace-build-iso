@@ -15,3 +15,6 @@ https://drive.google.com/open?id=1s-jG79uuR0hyrexpZFo7YE1LQNNuLxGw
 
 [GO TO THE NEXTSPACE GITHUB PAGE](https://www.github.com/trunkmaster/nextspace) credits to Trunkmaster
 
+## Run in it in QEMU
+
+qemu-system-x86_64 -m 1G -cdrom NEXTSPACE.iso
