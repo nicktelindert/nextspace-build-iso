@@ -30,7 +30,6 @@ syslinux
 firefox
 emacs
 gimp
-mpv
 network-manager-applet
 %end
 %post --nochroot 
