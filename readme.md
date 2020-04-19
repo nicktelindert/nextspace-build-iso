@@ -10,8 +10,8 @@ Image is now installable.
 ## Logging in
 - You can login with the live cd/usb with username nextspace and an empty password.
 
-## Download generated ISO(Alpha quality):
-https://drive.google.com/open?id=1s-jG79uuR0hyrexpZFo7YE1LQNNuLxGw
+## Create the image based on the current kickstarter script
+Run create.sh in the Docker/centos7 folder(install docker first) the image will be placed in the root of your home folder.
 
 [GO TO THE NEXTSPACE GITHUB PAGE](https://www.github.com/trunkmaster/nextspace) credits to Trunkmaster
 
