@@ -7,8 +7,8 @@ selinux --disabled
 rootpw --plaintext root
 repo --name=fedora-32 --baseurl=https://fedora.mirror.wearetriple.com/linux/releases/32/Everything/x86_64/os/
 %packages
-@core
-@x11
+@Base
+xorg
 kernel-devel
 wget
 git
