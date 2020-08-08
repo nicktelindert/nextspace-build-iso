@@ -5,8 +5,7 @@ timezone US/Eastern
 auth --useshadow --passalgo=sha512
 selinux --disabled
 rootpw --plaintext root
-repo --name=centos-7 --mirrorlist=http://mirrorlist.centos.org/?release=7&repo=os&arch=x86_64
-
+repo --name=fedora-32 --mirrorlist=https://admin.fedoraproject.org/mirrormanager/mirrors/Fedora/32/x86_64
 %packages
 @core
 @x11
