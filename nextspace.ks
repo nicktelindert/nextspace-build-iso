@@ -8,7 +8,10 @@ rootpw --plaintext root
 repo --name=fedora-32 --baseurl=https://fedora.mirror.wearetriple.com/linux/releases/32/Everything/x86_64/os/
 %packages
 @Core
-xorg
+xorg-x11-server-Xorg
+xorg-x11-drv-modesetting
+xorg-x11-drv-libinput
+xorg-x11-xinit
 kernel-devel
 wget
 git
