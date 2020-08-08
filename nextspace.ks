@@ -34,6 +34,7 @@ grub2
 grub2-efi-x64-cdboot
 grub2-efi-x64
 syslinux
+shadow-utils
 firefox
 emacs
 gimp
