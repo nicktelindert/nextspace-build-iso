@@ -5,7 +5,9 @@ timezone US/Eastern
 auth --useshadow --passalgo=sha512
 selinux --disabled
 rootpw --plaintext root
-repo --name=fedora-32 --baseurl=https://fedora.mirror.wearetriple.com/linux/releases/32/Everything/x86_64/os/
+repo --name=BaseOS --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=BaseOS
+repo --name=AppStream --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=AppStream
+repo --name=Devel --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=Devel
 %packages
 @Core
 xorg-x11-server-Xorg
@@ -62,8 +64,8 @@ EOF
 
 /usr/sbin/plymouth-set-default-theme nextspace -R
 ln -s /usr/NextSpace/Apps/Login.app/Resources/loginwindow.service /etc/systemd/system/multi-user.target.wants/display-manager.service
-cd /tmp & wget https://github.com/trunkmaster/nextspace/releases/download/0.90/NextSpace-0.90-Fedora_31.tgz
-tar zxf NextSpace-0.90-Fedora_31.tgz
+cd /tmp & wget https://github.com/trunkmaster/nextspace/releases/download/0.90/NextSpace-0.90-Centos_8.tgz
+tar zxf NextSpace-0.90-Centos_8.tgz
 cd Nextspace-0.90
 ./nextspace-install.sh
 /sbin/useradd -b /Users -s /bin/zsh -G audio nextspace
