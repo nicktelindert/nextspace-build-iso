@@ -69,7 +69,7 @@ EOF
 ln -s /usr/NextSpace/Apps/Login.app/Resources/loginwindow.service /etc/systemd/system/multi-user.target.wants/display-manager.service
 cd / & wget https://github.com/trunkmaster/nextspace/releases/download/0.90/NextSpace-0.90-Centos_8.tgz
 tar zxf NextSpace-0.90-Centos_8.tgz
-cd Nextspace-0.90
+cd NextSpace-0.90
 ./nextspace-install.sh
 /sbin/useradd -b /Users -s /bin/zsh -G audio nextspace
 /sbin/groupadd storage
