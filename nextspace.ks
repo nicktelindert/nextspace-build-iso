@@ -8,8 +8,10 @@ rootpw --plaintext root
 repo --name=BaseOS --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=BaseOS
 repo --name=AppStream --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=AppStream
 repo --name=Devel --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=Devel
+repo --name=Extras --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=Extras
 %packages
 @Core
+epel-release
 xorg-x11-server-Xorg
 xorg-x11-drv-modesetting
 xorg-x11-drv-libinput
