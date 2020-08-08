@@ -70,7 +70,7 @@ ln -s /usr/NextSpace/Apps/Login.app/Resources/loginwindow.service /etc/systemd/s
 cd / & wget https://github.com/trunkmaster/nextspace/releases/download/0.90/NextSpace-0.90-Centos_8.tgz
 tar zxf NextSpace-0.90-Centos_8.tgz
 cd NextSpace-0.90
-./nextspace-install.sh
+./nextspace_install.sh
 /sbin/useradd -b /Users -s /bin/zsh -G audio nextspace
 /sbin/groupadd storage
 passwd -d nextspace > /dev/null
