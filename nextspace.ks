@@ -13,7 +13,6 @@ repo --name=Extras --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&releas
 @Core
 tar
 gzip
-epel-release
 xorg-x11-server-Xorg
 xorg-x11-drv-modesetting
 xorg-x11-drv-libinput
@@ -68,7 +67,7 @@ EOF
 
 /usr/sbin/plymouth-set-default-theme nextspace -R
 ln -s /usr/NextSpace/Apps/Login.app/Resources/loginwindow.service /etc/systemd/system/multi-user.target.wants/display-manager.service
-cd /tmp & wget https://github.com/trunkmaster/nextspace/releases/download/0.90/NextSpace-0.90-Centos_8.tgz
+cd / & wget https://github.com/trunkmaster/nextspace/releases/download/0.90/NextSpace-0.90-Centos_8.tgz
 tar zxf NextSpace-0.90-Centos_8.tgz
 cd Nextspace-0.90
 ./nextspace-install.sh
