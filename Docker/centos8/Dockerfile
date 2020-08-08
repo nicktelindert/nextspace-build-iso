@@ -1,3 +1,3 @@
 FROM centos:8
 
-RUN dnf install -y git vim
+RUN dnf install -y livecd-tools git vim
