@@ -11,6 +11,8 @@ repo --name=Devel --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release
 repo --name=Extras --mirrorlist=http://mirrorlist.centos.org/?arch=x86_64&release=8&repo=Extras
 %packages
 @Core
+tar
+gzip
 epel-release
 xorg-x11-server-Xorg
 xorg-x11-drv-modesetting
